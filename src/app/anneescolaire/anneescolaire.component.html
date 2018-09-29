@@ -1,0 +1,101 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!--  NAV BAR-->
+<app-menu></app-menu>
+<!-- END NAV BAR-->
+<div class="jumbotron" style="margin-top:2% ">
+
+  <select class=form-control  style="width:190px"  [(ngModel)]="idanneeScolaire">
+    <option *ngFor="let year of listeYears" value="{{year.idAnneeScolaire}}">{{year.anneeScolaire}}</option>
+
+  </select>
+  <button type="submit" class="btn btn-danger" (click)="loadClasses(idanneeScolaire,page,size)">Chercher</button>
+
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+
+        <td >Classe</td>
+        <td>Niveau</td>
+        <td>Filière</td>
+
+      </tr>
+
+      </thead>
+      <tbody>
+
+      <tr *ngFor="let c of listeClasses">
+
+        <td>{{c.libelle}}</td>
+        <td>{{c.niveau.libelle}}</td>
+        <td>{{c.niveau.filiere.libelle}}</td>
+
+
+      </tr>
+
+
+      </tbody>
+    </table>
+    <ul>
+      <div >
+
+        <div class="row justify-content-center">
+          <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="size" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"  ></ngb-pagination>
+        </div>
+
+      </div>
+    </ul>
+  </div>
+</div>
+<p *ngIf="activatePanelSave==1">
+  <ngb-alert [dismissible]="true" type="info" (close)="hidenPanelSave()">
+    <strong> Données bien enregistées   </strong>
+  </ngb-alert>
+</p>
+
+<div class="jumbotron" style="margin-top:2%;background-color: whitesmoke;margin-bottom: 5px; ">
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+    <div class="form-group">
+      <label for="inputEmail">Année Scolaire</label>
+      <input type="text" class="form-control" id="inputEmail" placeholder="EXEMPLE:2004-2005"  name="year" ngModel>
+    </div>
+
+    <div class="form-group">
+      <label for="inputEmaile">Date De Début (Seméstre 1) </label>
+      <input type="date" class="form-control" id="inputEmaile"   name="dateDebutS_1" ngModel>
+    </div>
+
+    <div class="form-group">
+      <label for="inputEmailee">Date De Fin (Seméstre 1) </label>
+      <input type="date" class="form-control" id="inputEmailee"   name="dateFinS_1" ngModel>
+    </div>
+
+    <div class="form-group">
+      <label for="inputEmaileez">Date De Debut (Seméstre 2) </label>
+      <input type="date" class="form-control" id="inputEmaileez"   name="dateDebutS_2" ngModel>
+    </div>
+    <div class="form-group">
+      <label for="inputEmailees">Date De Fin (Seméstre 2) </label>
+      <input type="date" class="form-control" id="inputEmailees"   name="dateFinS_2" ngModel>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">ENREGISTRER</button>
+  </form></div>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!--  NAV BAR-->
+<app-menu></app-menu>
+<!-- END NAV BAR-->
+<div class="jumbotron" style="margin-top:2% ">
+
+
+
+  <div class="form-group">
+    <label for="inputEmaile">Année Scolaire</label>
+    <select class=form-control  [(ngModel)]="idAnneeScolaireModel">
+      <option *ngFor="let annee of anneeScolaireList" value="{{annee.idAnneeScolaire}}">{{annee.anneeScolaire}}</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-danger" (click)="chercherClasse()">Chercher</button>
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+
+        <td >Classe</td>
+        <td>Année Scolaire</td>
+        <td>Niveau Scolaire</td>
+        <td>Filière</td>
+
+      </tr>
+
+      </thead>
+      <tbody>
+
+      <tr *ngIf="activateTr==1">
+
+        <td>{{myclasse.libelle}}</td>
+        <td>{{myclasse.anneeScolaire.anneeScolaire}}</td>
+        <td>{{myclasse.niveau.libelle}}</td>
+        <td>{{myclasse.niveau.filiere.libelle}}</td>
+
+
+      </tr>
+
+      <tr  *ngFor="let c of listeClasse">
+
+        <td *ngIf="activateTr_2==1">{{c.libelle}}</td>
+        <td *ngIf="activateTr_2==1">{{c.anneeScolaire.anneeScolaire}}</td>
+        <td *ngIf="activateTr_2==1">{{c.niveau.libelle}}</td>
+        <td *ngIf="activateTr_2==1">{{c.niveau.filiere.libelle}}</td>
+
+
+      </tr>
+
+
+      </tbody>
+    </table>
+    <ul>
+      <div *ngIf="listeClasse && listeClasse.length">
+
+        <div class="row justify-content-center">
+          <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="size" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"  ></ngb-pagination>
+        </div>
+
+      </div>
+    </ul>
+  </div>
+</div>
+<p *ngIf="activatePanelSave==1">
+  <ngb-alert [dismissible]="true" type="info" (close)="hidenPanelSave()">
+    <strong> Données bien enregistées   </strong>
+  </ngb-alert>
+</p>
+
+<div class="jumbotron" style="margin-top:2%;background-color: whitesmoke;margin-bottom: 5px; ">
+
+
+
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+    <div class="form-group">
+
+      <div class="form-group">
+        <label for="inputEmaile">Code Classe </label>
+        <input type="text" class="form-control" id="inputEmaile" placeholder="text"  name="codeClasse" ngModel>
+      </div>
+
+
+      <div class="form-group">
+        <label for="inputEmaile">Année Scolaire</label>
+      <select class=form-control  name="idAnneeScolaire" ngModel>
+        <option *ngFor="let annee of anneeScolaireList" value="{{annee.idAnneeScolaire}}">{{annee.anneeScolaire}}</option>
+      </select>
+      </div>
+
+
+    <div class="form-group">
+      <label class="control-label">Niveau Scolaire</label>
+      <select multiple class="form-control" id="exampleFormControlSelect02" name="idNiveau"  ngModel>
+        <option  *ngFor="let niveau of listeNiveau" value="{{niveau.idNiveau}}" > {{niveau.libelle}}</option>
+      </select>
+    </div>
+
+
+
+
+    <button type="submit" class="btn btn-primary">ENREGISTRER</button>
+
+    </div>
+  </form>
+</div>
+
+</body>
+</html>

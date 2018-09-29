@@ -1,0 +1,65 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!--  NAV BAR-->
+<app-menu></app-menu>
+<!-- END NAV BAR-->
+<div class="jumbotron" style="margin-top:2% ">
+
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Jour</th>
+        <th>Heure De Départ</th>
+        <th>Heure De Fin</th>
+        <th>Matière</th>
+        <th>Professeur</th>
+        <th>Salle</th>
+
+
+
+
+      </tr>  <tr  *ngFor="let plan of plan">
+        <td *ngIf="showPanelTr==1"> {{plan.jour}}</td>
+        <td *ngIf="showPanelTr==1"> {{plan.heureDebutSeance}}</td>
+        <td *ngIf="showPanelTr==1"> {{plan.heurFinSeance}}</td>
+        <td *ngIf="showPanelTr==1"> {{plan.matiere.libelle}}</td>
+        <td *ngIf="showPanelTr==1"> {{plan.prof.username}}</td>
+        <td *ngIf="showPanelTr==1">  {{plan.salle.libelle}}</td>
+
+
+
+      </tr>
+
+      </thead>
+      <tbody>
+
+
+
+
+      </tbody>
+    </table>
+    <ul>
+
+
+    </ul>
+  </div>
+</div>
+
+
+
+
+</body>
+</html>

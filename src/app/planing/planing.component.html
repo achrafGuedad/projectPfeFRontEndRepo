@@ -1,0 +1,85 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!--  NAV BAR-->
+<app-menu></app-menu>
+<!-- END NAV BAR-->
+<div class="jumbotron" style="margin-top:2% ">
+
+
+
+  <div class="form-group">
+    <label for="inputEmaile">Année Scolaire</label>
+    <select class="form-control"  [(ngModel)]="idAnneeScolaireModel" id="inputEmaile">
+      <option *ngFor="let annee of anneeScolaireList" value="{{annee.idAnneeScolaire}}">{{annee.anneeScolaire}}</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-danger" (click)="chercherClasse()">Chercher</button>
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+
+        <td >Classe</td>
+        <td>Année Scolaire</td>
+        <td>Niveau Scolaire</td>
+        <td>Filière</td>
+        <td>voir Planing</td>
+        <td>Rédiger Planing</td>
+
+      </tr>
+
+      </thead>
+      <tbody>
+
+
+
+      <tr  *ngFor="let c of listeClasse">
+
+        <td *ngIf="activateTr==1">{{c.libelle}}</td>
+        <td *ngIf="activateTr==1">{{c.anneeScolaire.anneeScolaire}}</td>
+        <td *ngIf="activateTr==1">{{c.niveau.libelle}}</td>
+        <td *ngIf="activateTr==1">{{c.niveau.filiere.libelle}}</td>
+        <td><a (click)="getPlaning(c.idClasse)" >voir Planing</a></td>
+        <td><a (click)="getIdClasse(c.idClasse)">Rédiger Planing</a></td>
+
+
+      </tr>
+
+
+      </tbody>
+    </table>
+    <ul>
+      <div *ngIf="listeClasse && listeClasse.length">
+
+        <div class="row justify-content-center">
+          <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="size" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"  ></ngb-pagination>
+        </div>
+
+      </div>
+    </ul>
+  </div>
+</div>
+
+<p *ngIf="activatePanelSave==1">
+  <ngb-alert [dismissible]="true" type="info" (close)="hidenPanelSave()">
+    <strong> Données bien enregistées   </strong>
+  </ngb-alert>
+</p>
+
+
+
+</body>
+</html>

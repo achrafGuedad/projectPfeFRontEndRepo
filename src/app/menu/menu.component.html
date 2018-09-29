@@ -1,0 +1,184 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+<!--NAV MENU ADMIN --->
+<nav class="navbar navbar-inverse" *ngIf="auth.isAdmin()">
+
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+      <a class="navbar-brand" disabled>ESPACES</a>
+
+    </div>
+
+    <ul class="nav navbar-nav">
+
+      <li class=""><a routerLink="/AnneeScolaire">ANNEE SCOLAIRE</a></li>
+      <li class=""><a href="#"  routerLink="/Filiere">FILIERE</a></li>
+      <li class=""><a href="#"  routerLink="/Niveau">NIVEAU</a></li>
+
+      <li class="nav-item ">
+        <a class="nav-link " href="#" routerLink="/Filiere"> SALLE </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" routerLink="/Filiere"><i class="fa fa-th-list "  ></i>  <p>PAIEMENT</p> </a>
+      </li>
+
+
+      <li class="nav-item ">
+        <a class="nav-link"  routerLink="/Admin"><i class="fa fa-th-list "  ></i>  <p>ADMINISTRATION</p> </a>
+      </li>
+
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a (click)="onLogout()"><span class="glyphicon glyphicon-log-in" ></span> Log Out</a></li>
+      <li><a><span class="glyphicon glyphicon-user"></span> Bonjour {{user}}</a></li>
+
+
+
+    </ul>
+  </div>
+</nav>
+<!--    END NAV MENU ADMIN --->
+
+<!-- -------------  ----------->
+
+<!--    NAV MENU SECRETAIRE --->
+<nav class="navbar navbar-inverse"  *ngIf="auth.isSecretaire()">
+
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+      <a class="navbar-brand" disabled>ESPACES</a>
+
+    </div>
+
+    <ul class="nav navbar-nav" >
+
+      <li class=""><a routerLink="/Inscription">Inscription</a></li>
+      <li class=""><a routerLink="/Reinscription">Réinscription</a></li>
+      <li class=""><a routerLink="/Etudiant">Etudiant</a></li>
+      <li class=""><a routerLink="/Classe">Classe</a></li>
+
+
+
+
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a (click)="onLogout()"><span class="glyphicon glyphicon-log-in" ></span> Log Out</a></li>
+      <li><a><span class="glyphicon glyphicon-user"></span> Bonjour {{user}}</a></li>
+
+
+
+    </ul>
+  </div>
+</nav>
+<!--  END   NAV MENU SECRETAIRE --->
+<!--    ----------------------------------- -->
+
+
+<!--    NAV MENU PROFESSEUR --->
+<nav class="navbar navbar-inverse"  *ngIf="auth.isProf()">
+
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+      <a class="navbar-brand" disabled>ESPACES</a>
+
+    </div>
+
+    <ul class="nav navbar-nav" >
+
+      <li class=""><a routerLink="/Absence">Absence</a></li>
+      <li class=""><a   routerLink="/Controle">Saisie des notes</a></li>
+
+
+
+
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a (click)="onLogout()"><span class="glyphicon glyphicon-log-in" ></span> Log Out</a></li>
+      <li><a><span class="glyphicon glyphicon-user"></span> Bonjour {{user}}</a></li>
+
+
+
+    </ul>
+  </div>
+</nav>
+<!--  END   NAV MENU SECRETAIRE --->
+<!--    ----------------------------------- -->
+
+<!--    NAV MENU isSurveillant --->
+<nav class="navbar navbar-inverse"  *ngIf="auth.isSurveillant()">
+
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+      <a class="navbar-brand" disabled>ESPACES</a>
+
+    </div>
+
+    <ul class="nav navbar-nav" >
+
+      <li class=""><a routerLink="/Absence">Consultation des absences</a></li>
+      <li class=""><a  routerLink="/Planing">Planing</a></li>
+      <li class=""><a  routerLink="/ConsulterDemandes">Consultation des demandes</a></li>
+
+
+
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a (click)="onLogout()"><span class="glyphicon glyphicon-log-in" ></span> Log Out</a></li>
+      <li><a><span class="glyphicon glyphicon-user"></span> Bonjour {{user}}</a></li>
+
+
+
+    </ul>
+  </div>
+</nav>
+<!--  END   NAV MENU Surveillant --->
+<!--    ----------------------------------- -->
+
+
+
+<!--    NAV MENU ETUDIANT --->
+<nav class="navbar navbar-inverse"  *ngIf="auth.isStudent()">
+
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+      <a class="navbar-brand" disabled>ESPACES</a>
+
+    </div>
+
+    <ul class="nav navbar-nav" >
+
+      <li class=""><a   routerLink="/StudentAbsence">Absences</a></li>
+      <li class=""><a   routerLink="/NoteStudent">Notes</a></li>
+      <li class=""><a   routerLink="/StudentPlan">Emplois Du temps</a></li>
+      <li class=""><a   routerLink="/Niveau">Notifications</a></li>
+      <li class=""><a   routerLink="/DemanderPapier">Demandes de Papiers</a></li>
+      <li class=""><a   routerLink="/ConsultationDemandes">Suivi de Papiers </a></li>
+
+
+
+
+
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a (click)="onLogout()"><span class="glyphicon glyphicon-log-in" ></span> Log Out</a></li>
+      <li><a><span class="glyphicon glyphicon-user"></span> Bonjour {{user}}</a></li>
+
+
+
+    </ul>
+  </div>
+</nav>
+<!--  END   NAV MENU SECRETAIRE --->

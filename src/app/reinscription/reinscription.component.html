@@ -1,0 +1,81 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" hef="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<app-menu></app-menu>
+
+<div class="jumbotron" style="margin-top:2% ">
+
+
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+
+        <td >NOM</td>
+        <td>Prénom</td>
+        <td>E_mail</td>
+        <td>Numéro De Téléphone</td>
+        <td>Classe</td>
+        <td>Niveau</td>
+        <td>Filière</td>
+        <td>Année Scolaire</td>
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr *ngIf="activateTr==1">
+        <td>{{etudiantDetail.etudiant.nom}}</td>
+        <td>{{etudiantDetail.etudiant.prenom}}</td>
+        <td>{{etudiantDetail.etudiant.email}}</td>
+        <td>{{etudiantDetail.etudiant.numTel}}</td>
+        <td>{{etudiantDetail.classe.libelle}}</td>
+        <td>{{etudiantDetail.classe.niveau.libelle}}</td>
+        <td>{{etudiantDetail.classe.niveau.filiere.libelle}}</td>
+        <td>{{etudiantDetail.classe.anneeScolaire.anneeScolaire}}</td>
+      </tr>
+        <tr></tr>
+
+
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+
+
+<div class="jumbotron" style="margin-top:2%;background-color: whitesmoke;margin-bottom: 5px; ">
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+    <div class="form-group">
+      <label for="inputEmail">Username </label>
+      <input type="text" class="form-control" id="inputEmail" placeholder="Username"  name="username" ngModel>
+    </div>
+
+    <div class="form-group">
+      <label for="inputEmail">Classe  </label>
+    <select class=form-control  name="idClasse" ngModel >
+      <option *ngFor="let c of listeClasse" value="{{c.idClasse}}">{{c.libelle}} {{c.niveau.libelle}}</option>
+
+    </select> </div>
+
+
+
+
+    <button type="submit" class="btn btn-primary">ENREGISTRER</button>
+  </form></div>
+
+</body>
+</html>

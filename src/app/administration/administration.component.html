@@ -1,0 +1,99 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!--  NAV BAR-->
+<app-menu></app-menu>
+<!-- END NAV BAR-->
+<div class="jumbotron" style="margin-top:2% ">
+
+
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+
+        <td >Username</td>
+        <td>Password</td>
+        <td>Role</td>
+        <td>ACTION</td>
+      </tr>
+
+      </thead>
+      <tbody>
+
+      <tr *ngFor="let u of listeUsers">
+
+        <td>{{u.username}}</td>
+        <td>{{u.password}}</td>
+        <td> {{u.userRoles[0].roleName}}</td>
+
+        <td>
+
+          <a  title="supprimer" (click)="deleteUser(u.idUser)">
+            <span class="glyphicon glyphicon-trash"></span>
+          </a>
+
+          <a>
+            <span class="glyphicon glyphicon-wrench"></span>
+          </a>
+
+
+        </td>
+
+      </tr>
+
+
+      </tbody>
+    </table>
+    <ul>
+
+    </ul>
+  </div>
+</div>
+<p *ngIf="activatePanelSave==1">
+  <ngb-alert [dismissible]="true" type="info" (close)="hidenPanelSave()">
+    <strong> Données bien enregistées   </strong>
+  </ngb-alert>
+</p>
+
+<div class="jumbotron" style="margin-top:2%;background-color: whitesmoke;margin-bottom: 5px; ">
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+    <div class="form-group">
+      <label for="inputEmail">UserName </label>
+      <input type="text" class="form-control" id="inputEmail" placeholder="text"  name="username" ngModel>
+    </div>
+
+    <div class="form-group">
+      <label for="inputEmaile">Password </label>
+      <input type="password" class="form-control" id="inputEmaile" placeholder="text"  name="password" ngModel>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label">Role</label>
+      <select multiple class="form-control" id="exampleFormControlSelect02" name="role"  ngModel >
+        <option  > PROFESSEUR</option>
+        <option  > SECRETAIRE</option>
+        <option  > SURVEILLANT</option>
+      </select>
+    </div>
+
+
+
+
+    <button type="submit" class="btn btn-primary">ENREGISTRER</button>
+  </form></div>
+
+</body>
+</html>

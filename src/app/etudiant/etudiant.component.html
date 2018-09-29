@@ -1,0 +1,215 @@
+<div class="container">
+  <div class="container spacer" id="formu">
+    <div class="panel panel-red">
+      <div class="panel-heading"> </div>
+      <div class="panel-body">
+        <div>
+   <p> {{currenteDate | date: 'yyyy-mm-dd'}}</p>
+
+          <table class="table table-hover">
+            <thead>
+
+            <tr>
+              <form (ngSubmit)="findAllInscriptionsEtudiant(chercher)" #chercher="ngForm">
+
+              <td scope="col">
+                <div class="form-group">
+                <input class="form-control" type="text" placeholder="CHERCHER PAR IMMATRICULE" name="immatricule" ngModel/>
+              </div>
+
+
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary" style="width: 100%;">CHERCHER</button>
+                </div>
+              </td>
+              </form>
+              </tr>
+              <tr>
+              <th scope="col">Image </th>
+              <th scope="col">Nom Complet </th>
+              <th scope="col">Numéro De Téléphone</th>
+              <th scope="col">Email</th>
+              <th scope="col">Classe</th>
+              <th scope="col">NIVEAU</th>
+              <th scope="col">FILIERE</th>
+              <th scope="col">Année Scolaire</th>
+              <th scope="col">Buletin</th>
+              <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let inscription of inscriptionsEtudiant">
+              <td></td>
+              <td>{{inscription.etudiant.prenom}} {{inscription.etudiant.nom}}</td>
+              <td>{{inscription.etudiant.numTel}}</td>
+              <td>{{inscription.etudiant.email}}</td>
+              <td>{{inscription.classe.libelle}}</td>
+              <td>{{inscription.classe.niveau.libelle}}</td>
+              <td>{{inscription.classe.niveau.filiere.libelle}}</td>
+              <td>  <button  type="submit"   title="Modifier" class="btn btn-success btn-circle btn-lg"><i class="glyphicon glyphicon-link"></i></button>
+              </td>
+
+              <td>
+                <button  type="submit"   title="Modifier" class="btn btn-success btn-circle btn-lg" style="background-color: yellow"  (click)="updateInscription()"><i class="glyphicon glyphicon-link"></i></button>
+                <button  type="submit"   title="Supprimer" class="btn btn-success btn-circle btn-lg" style="background-color: red"><i class="glyphicon glyphicon-link"></i></button>
+              </td>
+
+
+            </tr>
+
+            </tbody>
+
+            <a> <p><strong>Nouvel(lle) Etudiant(e)</strong></p>
+            </a>
+
+          </table>
+          <a > <p><strong>Inscription</strong></p>
+          </a>
+
+          <a > <p><strong>Réinscription</strong></p>
+        </a>
+
+
+<div *ngIf="inscription===1">
+          <form >
+
+
+
+            <div class="form-group">
+              <label class="control-label">Nom</label>
+              <input class="form-control" type="text"  name="nom" ngModel />
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Prénom</label>
+              <input class="form-control" type="text"  name="prenom" ngModel />
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Numéro De Téléphone</label>
+              <input class="form-control" type="text"  name="numTel" ngModel />
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Email</label>
+              <input class="form-control" type="email"  name="email" ngModel />
+            </div>
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+
+
+          </form>
+</div>
+
+        <div *ngIf="inscription_2===1">
+
+          <a><button type="button" class="btn btn-danger" style="width: 3%">+</button></a>
+          <a><button type="button" class="btn btn-warning" style="width: 3%">+</button></a>
+          <p>DETAILS DES CLASSES</p>
+          <div class="progress" style="width: 100%;" >
+
+            <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%;height: 50%;background-color: black" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+
+          <form (ngSubmit)="inscrirEtudiant(ins)" #ins="ngForm">
+
+            <div class="form-group">
+              <label class="control-label">Code Etudiant</label>
+              <input class="form-control" type="text"   name="immatEtudiantIUNE"  ngModel />
+            </div>
+
+
+            <div class="form-group">
+              <label class="control-label">Année Scolaire</label>
+              <select multiple class="form-control" id="exampleFormControlSelect330" name="anneeScolaireIUNE" ngModel >
+                <option  *ngFor="let annee of anneeScolaireList" value="{{currenteDate | date: 'yyyy'}}" > {{annee.anneeScolaire}}</option>
+              </select>
+            </div>
+
+
+
+            <div class="form-group">
+              <label class="control-label">Classe</label>
+              <select multiple class="form-control" id="exampleFormControlSelect02" name="classeIUNE" ngModel >
+                <option  *ngFor="let classse of listeClasse" value="{{classse.idClasse}}" > {{classse.libelle}} {{classse.niveau.libelle}}</option>
+              </select>
+            </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+          </div>
+
+          </form>
+
+        </div>
+
+          <div *ngIf="reinscription===1">
+            <form (ngSubmit)="ReinscriptionEtudiantR(rei)" #rei="ngForm">
+
+
+            <div class="form-group">
+              <label class="control-label">Code Etudiant</label>
+              <input class="form-control" type="text"   name="codeEtudiantRE"  ngModel />
+            </div>
+
+
+
+            <div class="form-group">
+              <label class="control-label">Année Scolaire</label>
+              <select multiple class="form-control" id="exampleFormControlSelect3" name="anneeScolaireRE" ngModel >
+                <option  *ngFor="let annee of anneeScolaireList" value="{{currenteDate | date: 'yyyy'}}" > {{annee.anneeScolaire}}</option>
+              </select>
+            </div>
+
+
+
+
+
+            <div class="form-group">
+              <label class="control-label">Classe</label>
+              <select multiple class="form-control" id="exampleFormControlSelect2" name="classeRE" ngModel >
+                <option  *ngFor="let classse of listeClasse" value="{{classse.idClasse}}" > {{classse.libelle}} {{classse.niveau.libelle}}</option>
+              </select>
+            </div>
+
+              <div class="form-group">
+
+                <input type="text"  value="{{ currenteDate|date: 'yyyy'}}"  name="datte" ngModel  />
+
+              </div>
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>  </form>
+
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+

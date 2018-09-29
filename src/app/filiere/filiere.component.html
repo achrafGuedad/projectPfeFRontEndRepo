@@ -1,0 +1,90 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!--  NAV BAR-->
+<app-menu></app-menu>
+<!-- END NAV BAR-->
+<div class="jumbotron" style="margin-top:2% ">
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <td >CODE FILIERE</td>
+        <td >LIBELLE</td>
+        <td>DATE DE CREATION</td>
+        <td>ACTION</td>
+      </tr>
+
+      </thead>
+      <tbody>
+
+      <tr *ngFor="let filiere of listFiliere">
+
+        <td scope="row">{{filiere.codeFiliere}}</td>
+        <td>{{filiere.libelle}}</td>
+        <td>{{filiere.dateCreation}}</td>
+        <td>
+
+            <a (click)="deleteFiliere(filiere.codeFiliere)" title="supprimer" >
+              <span class="glyphicon glyphicon-trash"></span>
+            </a>
+
+            <a href="#">
+              <span class="glyphicon glyphicon-wrench"></span>
+            </a>
+
+
+        </td>
+
+      </tr>
+
+
+      </tbody>
+    </table>
+    <ul>
+      <div *ngIf="listFiliere && listFiliere.length">
+
+        <div class="row justify-content-center">
+          <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="size" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"  ></ngb-pagination>
+        </div>
+
+  </div>
+    </ul>
+  </div>
+</div>
+<p *ngIf="activatePanelSaveFiliere==1">
+  <ngb-alert [dismissible]="true" type="info" (close)="onredirect()">
+    <strong> Données bien enregistées   </strong>
+  </ngb-alert>
+</p>
+
+<div class="jumbotron" style="margin-top:2%;background-color: whitesmoke;margin-bottom: 5px; ">
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+    <div class="form-group">
+      <label for="inputEmail">Libélle </label>
+      <input type="email" class="form-control" id="inputEmail" placeholder="text"  name="libelle" ngModel>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword">Date De Création</label>
+      <input type="password" class="form-control" id="inputPassword"type="date" name="dateCreation" ngModel>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">ENREGISTRER</button>
+  </form></div>
+
+</body>
+</html>

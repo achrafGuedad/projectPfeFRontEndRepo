@@ -1,0 +1,98 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!--  NAV BAR-->
+<app-menu></app-menu>
+<!-- END NAV BAR-->
+<div class="jumbotron" style="margin-top:2% ">
+
+
+
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+
+        <td >NOM</td>
+        <td>Prénom</td>
+        <td>E_mail</td>
+        <td>Numéro De Téléphone</td>
+        <td>Classe</td>
+        <td>Niveau</td>
+        <td>Filière</td>
+        <td>Année Scolaire</td>
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr *ngIf="activateTable==1">
+        <td>{{etudiantDetail.etudiant.nom}}</td>
+        <td>{{etudiantDetail.etudiant.prenom}}</td>
+        <td>{{etudiantDetail.etudiant.email}}</td>
+        <td>{{etudiantDetail.etudiant.numTel}}</td>
+        <td>{{etudiantDetail.classe.libelle}}</td>
+        <td>{{etudiantDetail.classe.niveau.libelle}}</td>
+        <td>{{etudiantDetail.classe.niveau.filiere.libelle}}</td>
+        <td>{{etudiantDetail.classe.anneeScolaire.anneeScolaire}}</td>
+     </tr>
+
+
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<p *ngIf="activatePanelSave==1">
+  <ngb-alert [dismissible]="true" type="info" (close)="closePanelSave()">
+    <strong> Données bien enregistées   </strong>
+  </ngb-alert>
+</p>
+
+<div class="jumbotron" style="margin-top:2%;background-color: whitesmoke;margin-bottom: 5px; ">
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+    <div class="form-group">
+      <label for="inputEmail">Nom </label>
+      <input type="text" class="form-control" id="inputEmail" placeholder="text"  name="nom" ngModel>
+    </div>
+
+    <div class="form-group">
+      <label for="pr">Prénom </label>
+      <input type="text" class="form-control" id="pr" placeholder="text"  name="prenom" ngModel>
+    </div>
+
+    <div class="form-group">
+      <label for="num">Numéro De  Téléphone</label>
+      <input type="text" class="form-control" id="num" placeholder="text"  name="numTel" ngModel>
+    </div>
+
+    <div class="form-group">
+      <label for="inputEmailz">E_mail </label>
+      <input type="email" class="form-control" id="inputEmailz" placeholder="text"  name="email" ngModel>
+    </div>
+
+    <select class=form-control  name="idClasse" ngModel >
+      <option *ngFor="let c of listeClasse" value="{{c.idClasse}}">{{c.libelle}} {{c.niveau.libelle}} </option>
+
+    </select>
+
+
+
+
+    <button type="submit" class="btn btn-primary">ENREGISTRER</button>
+  </form></div>
+
+</body>
+</html>

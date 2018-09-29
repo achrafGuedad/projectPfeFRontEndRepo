@@ -1,0 +1,71 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!--  NAV BAR-->
+<app-menu></app-menu>
+<!-- END NAV BAR-->
+<div class="jumbotron" style="margin-top:2% ">
+
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Matière</th>
+        <th>Jour d'absence</th>
+        <th>De</th>
+        <th>à</th>
+        <th>Professeur</th>
+
+
+
+
+
+      </tr>  <tr  *ngFor="let c of listAbsence">
+        <td *ngIf="showPanelTr==1"> {{c.matiere.libelle}}</td>
+        <td *ngIf="showPanelTr==1"> {{c.jourAbsence}}</td>
+        <td *ngIf="showPanelTr==1"> {{c.heureDeppartAbsence}}</td>
+        <td *ngIf="showPanelTr==1"> {{c.heureFinAbsene}}</td>
+        <td *ngIf="showPanelTr==1"> {{c.prof}}</td>
+
+
+
+
+      </tr>
+
+      </thead>
+      <tbody>
+
+
+
+
+      </tbody>
+    </table>
+    <ul>
+      <div *ngIf="listAbsence && listAbsence.length">
+
+        <div class="row justify-content-center">
+          <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="size" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"  ></ngb-pagination>
+        </div>
+
+      </div>
+
+    </ul>
+  </div>
+</div>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!--  NAV BAR-->
+<app-menu></app-menu>
+<!-- END NAV BAR-->
+<div class="jumbotron" style="margin-top:2%;background-color: whitesmoke;margin-bottom: 5px; ">
+  <div class="container">
+
+    <div class="form-group">
+      <label for="formGroupExampleInput2"style="float:left" >Classe</label>
+      <select class="form-control" id="formGroupExampleInput2" [(ngModel)]="classe">
+        <option  *ngFor="let p of listeClasse" value="{{p.idClasse}}" > {{p.libelle}} {{p.niveau.libelle}} {{p.niveau.filiere.libelle}}</option>
+
+      </select>
+    </div>
+
+    <button type="button" class="btn btn-primary" (click)="chercherMatiereEtEtudiant()">Chercher Etudiants</button>
+
+
+
+
+
+  </div>
+
+
+
+  <div class="jumbotron" style="margin-top:2% " *ngIf="activatePanelMatier==1">
+
+    <div class="table-responsive">
+
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+
+        <div class="form-group">
+          <label for="formGroupExampleInput22"style="float:left">Matière</label>
+          <select class="form-control" id="formGroupExampleInput22" name="matiere" ngModel>
+            <option  *ngFor="let plan of listeMatiere" value="{{plan.matiere.idMatiere}}"> {{plan.matiere.libelle}} {{plan.heureDebutSeance}}-{{plan.heurFinSeance}} </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="inputEmailee">Numéro du Controle </label>
+          <input type="text" class="form-control" id="inputEmailee"   name="numeroControle" ngModel>
+        </div>
+
+
+
+
+
+
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+
+
+            <td >Etudiant</td>
+            <td>Note</td>
+
+          </tr>
+
+          </thead>
+          <tbody>
+
+          <tr *ngFor="let u of listeEtudiant ">
+
+            <td>{{u.nom}} &nbsp; {{u.prenom}}  </td>
+
+            <td>
+
+
+                <input type="text" class="form-control" id="note"  placeholder="NOTE..."  name="note" ngModel>
+
+
+
+               <br />
+              <button type="submit" class="btn btn-primary" (click)="getEtudiant(u.immat)" ><span class="glyphicon glyphicon-floppy-disk"></span></button>
+
+
+            </td>
+
+
+
+          </tr>
+
+
+          </tbody>
+        </table>
+        <ul>
+          <div *ngIf="listeEtudiant && listeEtudiant.length">
+
+            <div class="row justify-content-center">
+              <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="size" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"  ></ngb-pagination>
+            </div>
+
+          </div>
+        </ul>
+      </form>
+    </div>
+  </div>
+
+
+</div>
+</body>
+</html>

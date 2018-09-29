@@ -1,0 +1,150 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!--  NAV BAR-->
+<app-menu></app-menu>
+<!-- END NAV BAR-->
+<div class="jumbotron" style="margin-top:2% ">
+
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Jour</th>
+        <th>Heure De Départ</th>
+        <th>Heure De Fin</th>
+        <th>Matière</th>
+        <th>Professeur</th>
+        <th>Salle</th>
+        <th>action</th>
+
+
+
+      </tr>  <tr  *ngFor="let plan of listePlan">
+        <td *ngIf="showPanelTr==1"> {{plan.jour}}</td>
+        <td *ngIf="showPanelTr==1"> {{plan.heureDebutSeance}}</td>
+        <td *ngIf="showPanelTr==1"> {{plan.heurFinSeance}}</td>
+        <td *ngIf="showPanelTr==1"> {{plan.matiere.libelle}}</td>
+        <td *ngIf="showPanelTr==1"> {{plan.prof.username}}</td>
+        <td *ngIf="showPanelTr==1">  {{plan.salle.libelle}}</td>
+        <td *ngIf="showPanelTr==1">
+
+          <a  title="supprimer" >
+            <span class="glyphicon glyphicon-trash"></span>
+          </a>
+
+          <a href="#">
+            <span class="glyphicon glyphicon-wrench"></span>
+          </a>
+
+
+        </td>
+
+      </tr>
+
+      </thead>
+      <tbody>
+
+
+
+
+      </tbody>
+    </table>
+    <ul>
+      <div *ngIf="listeMatiere && listeMatiere.length">
+
+        <div class="row justify-content-center">
+          <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="size" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"  ></ngb-pagination>
+        </div>
+
+      </div>
+    </ul>
+  </div>
+</div>
+<p *ngIf="activatePanelSave==1">
+  <ngb-alert [dismissible]="true" type="info" (close)="hidenPanelSave()">
+    <strong> Données bien enregistées   </strong>
+  </ngb-alert>
+</p>
+
+<div class="jumbotron" style="margin-top:2%;background-color: whitesmoke;margin-bottom: 5px; ">
+
+
+
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+    <div class="form-group">
+
+      <div class="form-group">
+        <label for="inputEmaile">Matière</label>
+        <select class=form-control  name="matiere" ngModel *ngIf="myData==1">
+          <option *ngFor="let m of listeMatiere" value="{{m.idMatiere}}">{{m.libelle}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="inputEmaile"> Jour</label>
+        <select class=form-control  name="jour" ngModel>
+          <option value="LUNDI" >LUNDI</option>
+          <option value="MARDI" >MARDI</option>
+          <option value="MERCREDI" >MERCREDI</option>
+          <option value="JEUDI" >JEUDI</option>
+          <option value="VENDREDI" >VENDREDI</option>
+          <option value="SAMEDI">SAMEDI</option>
+        </select>
+      </div>
+
+
+
+      <div class="form-group">
+        <label for="heureDepart">Heure De Départ De La Séance  </label>
+        <input type="time" class="form-control" id="heureDepart"   name="heureDepart" ngModel>
+      </div>
+
+      <div class="form-group">
+        <label for="inputEmaile">Heure De Fin De La Séance  </label>
+        <input type="time" class="form-control" id="inputEmaile"  name="heureFin" ngModel>
+      </div>
+
+      <div class="form-group">
+        <label >Professeur</label>
+        <select class=form-control  name="prof" ngModel>
+          <option *ngFor="let p of listeProf" value="{{p.idUser}}">{{p.username}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label >Salle</label>
+        <select class=form-control  name="salle" ngModel>
+          <option *ngFor="let s of listeSalle" value="{{s.idSalle}}">{{s.libelle}}</option>
+        </select>
+      </div>
+
+
+
+
+
+
+
+
+
+
+      <button type="submit" class="btn btn-primary">ENREGISTRER</button>
+
+    </div>
+  </form>
+</div>
+
+</body>
+</html>
